@@ -40,6 +40,7 @@ public class CatalogoService {
     @GET
     @Path("muebles/")
     public List<Mueble> getTodosLosMuebles() {
+        System.out.println(catalogoEjb.darMuebles());
         return catalogoEjb.darMuebles();
  
     }

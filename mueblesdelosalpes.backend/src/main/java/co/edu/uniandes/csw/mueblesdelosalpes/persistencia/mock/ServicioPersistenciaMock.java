@@ -20,6 +20,7 @@ import co.edu.uniandes.csw.mueblesdelosalpes.dto.TipoMueble;
 import co.edu.uniandes.csw.mueblesdelosalpes.dto.TipoUsuario;
 import co.edu.uniandes.csw.mueblesdelosalpes.dto.Usuario;
 import co.edu.uniandes.csw.mueblesdelosalpes.dto.Vendedor;
+import co.edu.uniandes.csw.mueblesdelosalpes.dto.MuebleOferta;
 import co.edu.uniandes.csw.mueblesdelosalpes.excepciones.OperacionInvalidaException;
 import co.edu.uniandes.csw.mueblesdelosalpes.logica.interfaces.IServicioPersistenciaMockLocal;
 import co.edu.uniandes.csw.mueblesdelosalpes.logica.interfaces.IServicioPersistenciaMockRemote;
@@ -60,6 +61,11 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
      * Lista con los registros de ventas
      */
     private static ArrayList<RegistroVenta> registrosVentas;
+    
+    /**
+     * Lista con los registros de ofertas
+     */
+    private static ArrayList<MuebleOferta> mueblesOferta;    
 
     //-----------------------------------------------------------
     // Constructor
@@ -110,6 +116,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
             usuarios.add(new Usuario("client", "clientclient", TipoUsuario.Cliente));
 
             registrosVentas = new ArrayList<RegistroVenta>();
+            mueblesOferta = new ArrayList<MuebleOferta>();
             Random r = new Random();
             for (int e = 0; e < 8; e++) {
                 RegistroVenta venta = new RegistroVenta();
@@ -165,6 +172,10 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
         {
             registrosVentas.add((RegistroVenta) obj);
         }
+        else if (obj instanceof MuebleOferta)
+        {
+            mueblesOferta.add((MuebleOferta) obj);
+        }        
     }
 
     /**
@@ -310,10 +321,15 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
         {
             return registrosVentas;
         } 
+        else if (c.equals(MuebleOferta.class))
+        {
+            return mueblesOferta;
+        }        
         else
         {
             return null;
-        }
+        }                
+
     }
 
     /**
